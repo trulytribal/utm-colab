@@ -8,7 +8,9 @@ export default function DashboardPage() {
     <div className="w-full px-6">
       <Card className="border-none drop-shadow-sm bg-secondary">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
-          <CardTitle className="text-xl line-clamp-1">AccountsPage</CardTitle>
+          <CardTitle className="text-xl line-clamp-1">
+            Dashboard Overview Page
+          </CardTitle>
           <Button>
             {' '}
             <Plus className="size-4 mr-2" /> Add New
