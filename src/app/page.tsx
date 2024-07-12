@@ -12,8 +12,12 @@ export default function Home() {
         their link performance from GA4
       </div>
       <div className="mt-4 flex flex-row items-center justify center space-x-4">
-        <Button>Get Started</Button>
-        <Button>Sign In</Button>
+        <Button onClick={() => (window.location.href = '/sign-up')}>
+          Get Started
+        </Button>
+        <Button onClick={() => (window.location.href = '/sign-in')}>
+          Sign In
+        </Button>
       </div>
     </main>
   );
