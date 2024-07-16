@@ -26,6 +26,48 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { JSX, SVGProps } from 'react';
 import { UserButton } from '@clerk/nextjs';
+import { HeaderLogo } from './header-logo';
+import { HandCoins, Webhook } from 'lucide-react';
+
+type SidebarLink = {
+  href: string;
+  srTitle: string;
+  tooltip: string;
+  Icon: React.ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+const links: SidebarLink[] = [
+  {
+    href: '/dashboard',
+    srTitle: 'Overview Dashboard',
+    tooltip: 'Dashboard',
+    Icon: HomeIcon,
+  },
+  {
+    href: '/dashboard/landing',
+    srTitle: 'Landing Pages Overview',
+    tooltip: 'Landing Pages',
+    Icon: HandCoins,
+  },
+  {
+    href: '/dashboard/platforms',
+    srTitle: 'Platforms Overview',
+    tooltip: 'Platforms Overview',
+    Icon: PackageIcon,
+  },
+  {
+    href: '/dashboard/links',
+    srTitle: 'Tagged Links Overview',
+    tooltip: 'Links Overview',
+    Icon: Webhook,
+  },
+  {
+    href: '/dashboard/analytics',
+    srTitle: 'Link Performance Overview',
+    tooltip: 'Link Performance Overview',
+    Icon: LineChartIcon,
+  },
+];
 
 export default function SidebarHeader({
   children,
@@ -38,16 +80,30 @@ export default function SidebarHeader({
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
             <Link
-              href="#"
+              href="/dashboard"
               className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
               prefetch={false}>
-              <Package2Icon className="h-4 w-4 transition-all group-hover:scale-110" />
-              <span className="sr-only">Acme Inc</span>
+              <HeaderLogo />
+              <span className="sr-only">UTM Colab</span>
             </Link>
-            <Tooltip>
+            {links.map((link, index) => (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={link.href}
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                    prefetch={false}>
+                    <link.Icon className="h-5 w-5" />
+                    <span className="sr-only">{link.srTitle}</span>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="right">{link.tooltip}</TooltipContent>
+              </Tooltip>
+            ))}
+            {/* <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
+                  href="/dashboard"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}>
                   <HomeIcon className="h-5 w-5" />
@@ -59,14 +115,14 @@ export default function SidebarHeader({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  href="/landing"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}>
                   <ShoppingCartIcon className="h-5 w-5" />
-                  <span className="sr-only">Orders</span>
+                  <span className="sr-only">Landing Pages</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Orders</TooltipContent>
+              <TooltipContent side="right">Landing Pages</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -75,10 +131,10 @@ export default function SidebarHeader({
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}>
                   <PackageIcon className="h-5 w-5" />
-                  <span className="sr-only">Products</span>
+                  <span className="sr-only">Platforms</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Products</TooltipContent>
+              <TooltipContent side="right">Platforms</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -87,10 +143,10 @@ export default function SidebarHeader({
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}>
                   <UsersIcon className="h-5 w-5" />
-                  <span className="sr-only">Customers</span>
+                  <span className="sr-only">Links</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Customers</TooltipContent>
+              <TooltipContent side="right">Links</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -99,11 +155,11 @@ export default function SidebarHeader({
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   prefetch={false}>
                   <LineChartIcon className="h-5 w-5" />
-                  <span className="sr-only">Analytics</span>
+                  <span className="sr-only">Performance</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Analytics</TooltipContent>
-            </Tooltip>
+              <TooltipContent side="right">Performance</TooltipContent>
+            </Tooltip> */}
           </TooltipProvider>
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
